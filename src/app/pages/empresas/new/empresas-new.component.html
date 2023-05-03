@@ -1,0 +1,117 @@
+<div class="content d-flex flex-column flex-column-fluid pt-0" id="kt_content">
+    <app-top-buttons (stayOnPage)="stayOnPage=$event" [options]="TopOptions" [form]="f"></app-top-buttons>
+    <div class="d-flex flex-column-fluid">
+        <div class="container">
+            <div class="card card-custom mt-5">
+                <div class="card-header card-header-tabs-line">
+                    <div class="card-toolbar">
+                        <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x"
+                            role="tablist">
+                            <li class="nav-item mr-3" (click)="changeTab(tabs.BASIC_TAB)">
+                                <a class="nav-link" data-toggle="tab" role="tab"
+                                    [class.active]="activeTabId === tabs.BASIC_TAB">
+                                    <span class="nav-icon mr-2">
+                                        <span class="svg-icon menu-icon"
+                                            [inlineSVG]="'assets/media/svg/icons/Communication/Chat-check.svg'">
+                                        </span>
+                                    </span>
+                                    <span class="nav-text font-weight-bold">Detalhes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" [class.active]="activeTabId === tabs.BASIC_TAB">
+                            <form class="form" (ngSubmit)="save(f)" #f="ngForm">
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <p [hidden]="f.form.valid"> Por favor, preencha todos os campos</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Nome <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="text"
+                                            name="primeiro_nome" id="primeiro_nome" ngModel required
+                                            autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        CNPJ <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="text"
+                                            name="cnpj" id="cnpj" ngModel required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Razão Social <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="text"
+                                            name="razao_social" id="razao_social" ngModel required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Username <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="text"
+                                            name="username" id="username" ngModel required autocomplete="off"
+                                            (focusout)="verifyExist('username',item.username)" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Email <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="email"
+                                            name="email" id="email" ngModel required autocomplete="off"
+                                            (focusout)="verifyExist('email',item.email)" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Telefone <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="tel"
+                                            name="telefone" id="telefone" ngModel required
+                                            autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Endereço <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="text"
+                                            name="endereco" id="endereco" ngModel required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">
+                                        Password <span class="required"></span>
+                                    </label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control form-control-lg form-control-solid" type="password"
+                                            name="password" id="password" ngModel required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="separator separator-dashed my-10"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

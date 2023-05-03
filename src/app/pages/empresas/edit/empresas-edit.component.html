@@ -1,0 +1,174 @@
+<div class="content d-flex flex-column flex-column-fluid pt-0" id="kt_content">
+
+    <div class="card card-custom gutter-b">
+        <div class="card-header" *ngIf='user$.super_administrador ==1'>
+            <div class="card-title">
+                <h3 class="card-label">{{item.primeiro_nome | titlecase}}</h3>
+            </div>
+            <div class="card-toolbar">
+            </div>
+        </div>
+        <div class="d-flex flex-column-fluid">
+            <div class="container">
+                <div class="card card-custom mt-5">
+                    <div class="card-header card-header-tabs-line">
+                        <div class="card-title m-0">
+                            <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-tabs-bold nav-tabs-line-3x"
+                                role="tablist">
+                                <li class="nav-item mr-3" (click)="changeTab(tabs.BASIC_TAB)"
+                                    *ngIf='user$.super_administrador ==1'>
+                                    <a class="nav-link" data-toggle="tab" role="tab"
+                                        [class.active]="activeTabId === tabs.BASIC_TAB">
+                                        <span class="nav-icon mr-2">
+                                            <span class="svg-icon menu-icon"
+                                                [inlineSVG]="'assets/media/svg/icons/Communication/Chat-check.svg'">
+                                            </span>
+                                        </span>
+                                        <span class="nav-text font-weight-bold">Detalhes</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item mr-3" (click)="changeTab(tabs.SENSORES_TAB)">
+                                    <a class="nav-link" data-toggle="tab" role="tab"
+                                        [class.active]="activeTabId === tabs.SENSORES_TAB">
+                                        <span class="nav-icon mr-2">
+                                            <span class="svg-icon menu-icon"
+                                                [inlineSVG]="'assets/media/svg/icons/Communication/Chat-check.svg'">
+                                            </span>
+                                        </span>
+                                        <span class="nav-text font-weight-bold">Sensores</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item mr-3" (click)="changeTab(tabs.FUNCIONARIOS_TAB)"
+                                    *ngIf='user$.super_administrador ==1'>
+                                    <a class="nav-link" data-toggle="tab" role="tab"
+                                        [class.active]="activeTabId === tabs.FUNCIONARIOS_TAB">
+                                        <span class="nav-icon mr-2">
+                                            <span class="svg-icon menu-icon"
+                                                [inlineSVG]="'assets/media/svg/icons/Communication/Chat-check.svg'">
+                                            </span>
+                                        </span>
+                                        <span class="nav-text font-weight-bold">Funcionários</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <app-spinner [hidden]="!showLoadingSpinner"></app-spinner>
+                        <div class="tab-content pt-5" [hidden]="showLoadingSpinner">
+                            <div class="tab-pane active" role="tabpanel"
+                                [class.active]="activeTabId === tabs.BASIC_TAB">
+                                <form class="form" (ngSubmit)="save(f)" #f="ngForm" id="formEmpresa">
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Nome
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                                name="primeiro_nome" id="primeiro_nome" [ngModel]="item.primeiro_nome"
+                                                required autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">CNPJ
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                                name="cnpj" id="cnpj" [ngModel]="item.cnpj" required
+                                                autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Razão Social
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                                name="razao_social" id="razao_social" [ngModel]="item.razao_social"
+                                                required autocomplete="off" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Telefone
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="tel"
+                                                name="telefone" id="telefone" [ngModel]="item.telefone" required
+                                                autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Username <span
+                                                class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                                name="username" id="username" required autocomplete="off"
+                                                (focusout)="verifyExist('username',item.username)"
+                                                [ngModel]="item.username" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Email
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="email"
+                                                name="email" id="email" [ngModel]="item.email" required
+                                                autocomplete="off" (focusout)="verifyExist('username',item.username)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Endereço
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid" type="text"
+                                                name="endereco" id="endereco" [ngModel]="item.endereco" required
+                                                autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Password
+                                            <span class="required"></span> </label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control form-control-lg form-control-solid"
+                                                type="password" name="password" id="password" [ngModel]="item.password"
+                                                required autocomplete="off" />
+                                        </div>
+                                    </div>
+                                    <div class="separator separator-dashed my-10"></div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label text-right">Ativo</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <select name="ativo" class="form-control form-control-lg form-control-solid"
+                                                [ngModel]="item.ativo">
+                                                <option value="0">Não</option>
+                                                <option value="1">Sim</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-3 offset-3">
+                                            <button type="submit" form="formEmpresa" class="btn btn-primary btn-block">
+                                                Gravar </button>
+                                        </div>
+                                        <div class="col-3">
+                                            <button (click)="deleteItem(id)" type="button"
+                                                class="btn btn-danger btn-block">Excluir Empresa</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" role="tabpanel" [class.active]="activeTabId === tabs.SENSORES_TAB">
+                                <app-sensores-list></app-sensores-list>
+                            </div>
+                            <div class="tab-pane" role="tabpanel"
+                                [class.active]="activeTabId === tabs.FUNCIONARIOS_TAB">
+                                <app-funcionarios-list></app-funcionarios-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

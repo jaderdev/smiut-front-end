@@ -1,0 +1,28 @@
+.linguas{
+    border: 0;
+    margin: 0;
+    mat-button-toggle{
+        border: 0;
+        padding: 1rem 1.3rem;
+        &:not(:last-child){
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        &:not(:first-child){
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+    
+    .mat-button-toggle-checked{
+        //background-color: #181C32;
+        //color:#fff;
+        background-color: #C9F7F5;
+        color: #1BC5BD;
+        &:hover{
+            background-color: #C9F7F5 !important;
+            color: #1BC5BD !important;
+        }
+    }
+    
+}

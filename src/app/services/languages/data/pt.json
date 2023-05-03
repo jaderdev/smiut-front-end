@@ -1,0 +1,23 @@
+{
+    "enterprises": {
+        "delete_confirm": "Deseja apagar a empresa e todos os respectivos sensores?",
+        "deleting_sensors": "Apagando sensores",
+        "fill_form": "Preencha todos os campos obrigatórios"
+    },
+    "sensors": {},
+    "app": {
+        "success": "Realizado com sucesso",
+        "success_title": "Sucesso",
+        "error": "Não foi realizado",
+        "error_title": "Erro",
+        "retry": "Tente novamente mais tarde",
+        "confirm": "Deseja realizar esta ação?",
+        "confirm_title": "Tem certeza?",
+        "delete_title": "Eliminar",
+        "delete_confirm": "Deseja eliminar este item?",
+        "delete_all_title": "Eliminar todos",
+        "delete_all_confirm": "Pretende mesmo eliminar todos os registos selecionados?",
+        "please_wait": "Por favor aguarde",
+        "loading": "Carregando"
+    }
+}

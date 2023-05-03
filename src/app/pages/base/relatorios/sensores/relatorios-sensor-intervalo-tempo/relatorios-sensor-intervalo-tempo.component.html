@@ -1,0 +1,76 @@
+<div class="content d-flex flex-column flex-column-fluid container">
+    <div class="card card-custom gutter-b">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">{{page | titlecase}} - Intervalo Tempo</h3>
+            </div>
+            <div class="card-toolbar">
+                <button type="submit" class="btn btn-primary" form="form">Pesquisar</button>
+                <button type="button" class="btn btn-secondary" (click)="generatePDF(formIntervalo)">PDF</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form form-label-right" id="form" #formIntervalo="ngForm" (ngSubmit)="onSubmit(formIntervalo)"
+                form="form">
+                <div class="form-group row">
+                    <div class="col-lg-3" *ngIf='user$.super_administrador == 1'>
+                        <small class="form-text text-muted"><b>Filtro:</b> Empresas</small>
+                        <select class="form-control form-control-lg select2 form-control-solid" id="id_empresa"
+                            name="id_empresa" required ngModel (change)=findSensors($event.target.value)>
+                            <option value="">Selecione uma empresa</option>
+                            <option *ngFor="let item of empresas" value="{{item.id}}">
+                                {{item.primeiro_nome}} </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <small class="form-text text-muted"><b>Filtro:</b> Data </small>
+                        <input type="date" class="form-control" name="data_fim" ngModel
+                            placeholder="Pesquisar por data">
+                    </div>
+                    <div class="col-lg-3">
+                        <small class="form-text text-muted"><b>Filtro:</b> Sensores</small>
+                        <select class="form-control" name="sensores" placeholder="Filtrar por sensores" ngModel>
+                            <option value="">Selecione um sensor</option>
+                            <option *ngFor="let item of sensores" value="{{item.id}}">
+                                {{item.nome}} </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <small class="form-text text-muted"><b>Filtro:</b> Intervalo </small>
+                        <select name="intervalo" class="form-control" required ngModel>
+                            <option value="">Selecione um intervalo</option>
+                            <option value="10">10 minutos</option>
+                            <option value="30">30 minutos</option>
+                            <option value="60">1 hora</option>
+                            <option value="120">2 horas</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <app-spinner [hidden]="!showLoadingSpinner"></app-spinner>
+
+            <div class="table-responsive angular-bootstrap-table" [hidden]="showLoadingSpinner">
+                <table class="table table-head-custom table-vertical-center overflow-hidden text-center">
+                    <thead>
+                        <th>Hora Início</th>
+                        <th>Hora Fim</th>
+                        <th>Média Temperatura ( {{gaugeOptions?.temp}} )</th>
+                        <th>Média Umidade ( {{gaugeOptions?.umid}} )</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of items">
+                            <td>{{item.date_init | date: 'HH:mm' }}</td>
+                            <td>{{item.date_end | date: 'HH:mm' }}</td>
+                            <td>{{item.media_valor_temperatura}}</td>
+                            <td>{{item.media_valor_umidade}}</td>
+                        </tr>
+                        <tr *ngIf="items?.length==0">
+                            <td colspan="99" class="text-center">Não há registos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" ></app-paginator> -->
+        </div>
+    </div>
+</div>

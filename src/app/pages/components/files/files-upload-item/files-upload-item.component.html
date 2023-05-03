@@ -1,0 +1,18 @@
+<ng-container id="file">
+    <div *ngIf="file" class="py-4">
+        <a class="btn btn-primary" [href]="file" target="_blank" *ngIf="!uploaded">Download</a>
+        <button class="btn btn-danger" type="button" (click)="removeFile()">Remover</button>
+    </div>
+
+    <label class="custom-file-upload">
+        <div class="dropzone dropzone-default dz-clickable">
+            <div class="dropzone-msg dz-message needsclick">
+                <h3 class="dropzone-msg-title">Upload</h3>
+                <span class="dropzone-msg-desc">Arraste seus ficheiros para realizar o upload.</span>
+                <input type="file" (change)="changeFile($event)" id="custom-file-upload" />
+                <p>Tamanho máximo 3mb</p>
+            </div>
+        </div>
+    </label>
+    <!-- <span class="form-text text-muted">Tipos suportados: png, jpg, jpeg.</span> -->
+</ng-container>

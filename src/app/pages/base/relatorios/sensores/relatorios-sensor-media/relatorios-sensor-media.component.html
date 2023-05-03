@@ -1,0 +1,85 @@
+<div class="content d-flex flex-column flex-column-fluid container">
+    <div class="card card-custom gutter-b">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">{{page | titlecase}} - Média</h3>
+            </div>
+            <div class="card-toolbar">
+                <button type="submit" form="formMedia" class="btn btn-primary">Pesquisar</button>
+                <button type="button" class="btn btn-secondary" (click)="generatePDF(formMedia)">PDF</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form form-label-right" id="formMedia" (ngSubmit)="createReport(formMedia)" #formMedia="ngForm">
+                <div class="form-group row">
+                    <div class="col-lg-3" *ngIf='user$.super_administrador == 1'>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <select class="form-control form-control-lg select2 " id="id_empresa" name="id_empresa"
+                                    required (change)=findSensors($event.target.value) ngModel>
+                                    <option value="">Selecione uma empresa</option>
+                                    <option *ngFor="let item of empresas" value="{{item.id}}">
+                                        {{item.primeiro_nome}} </option>
+                                </select>
+                                <small class="form-text text-muted"><b>Filtro:</b> Empresas</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <select class="form-control" name="sensores" placeholder="Filtrar por sensores" ngModel
+                                    required [disabled]="!sensores">
+                                    <option value="">Selecione um sensor</option>
+                                    <option *ngFor="let item of sensores" value="{{item.id}}">
+                                        {{item.nome}} </option>
+                                </select>
+                                <small class="form-text text-muted"><b>Filtro:</b> Sensores</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="date" class="form-control" name="data_inicio"
+                                    placeholder="Pesquisar por data" required [(ngModel)]="data_inicio">
+                                <small class="form-text text-muted"><b>Filtro:</b> Data Início</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="date" class="form-control" name="data_fim" placeholder="Pesquisar por data"
+                                    required [(ngModel)]="data_fim">
+                                <small class="form-text text-muted"><b>Filtro:</b> Data Fim</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <app-spinner [hidden]="!showLoadingSpinner"></app-spinner>
+
+            <div class="table-responsive angular-bootstrap-table" [hidden]="showLoadingSpinner" id="invoice" #invoice>
+                <table class="table table-head-custom table-vertical-center overflow-hidden">
+                    <thead class="text-center">
+                        <th>Data</th>
+                        <th>Média Temperatura ( {{gaugeOptions?.temp}} )</th>
+                        <th>Média Umidade ( {{gaugeOptions?.umid}} )</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of items">
+                            <td class="text-center">{{item.dateFormatted}}</td>
+                            <td class="text-center">{{item.media_temp}} </td>
+                            <td class="text-center">{{item.media_umid}}</td>
+                        </tr>
+                        <tr *ngIf="items?.length==0">
+                            <td colspan="99" class="text-center">Não há registos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" ></app-paginator> -->
+        </div>
+    </div>
+</div>

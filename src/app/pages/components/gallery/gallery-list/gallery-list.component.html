@@ -1,0 +1,105 @@
+<div class="row align-items-center form-group-actions top">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary font-weight-bold navi-link mr-3" (click)="openFileSelect()">
+            <span class=" navi-icon">
+                <i class="flaticon2-writing"></i>
+            </span>
+            <span class="navi-text">Adicionar</span>
+        </button>
+        <input class="btn btn-primary hidden" type="file" (change)="addImageToList($event)" id="imageSelect" multiple />
+    </div>
+</div>
+<div class="row align-items-center form-group-actions " [hidden]="selectedItems.length == 0">
+    <div class="col-xl-12 pt-3">
+        <div class="form-group form-group-inline">
+            <div class="form-label form-label-no-wrap">
+                <label class="font-bold font-danger">
+                    <span>Itens selecionados:
+                        <strong> {{selectedItems.length}}</strong>
+                    </span>
+                </label>
+            </div>
+            <div>
+                <button type="button" class="btn btn-danger font-weight-bolder font-size-sm mr-1"
+                    (click)="deleteSelected()">
+                    <i class="fa fa-trash"></i> Apagar selecionados
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row pt-4" id="list">
+    <div class="col-12">
+        <div class="table-responsive angular-bootstrap-table">
+            <table class="table table-head-custom table-vertical-center overflow-hidden" id="imgs-table">
+                <thead>
+                    <th class="selection-cell-header" data-row-selection="true">
+                        <label class="checkbox checkbox-single">
+                            <input type="checkbox" (change)="selectAll($event)" [disabled]="items?.length==0"
+                                [checked]="checkedSelectAll" /><span></span>
+                        </label>
+                    </th>
+                    <th>Thumbnail</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th width="10%">Ordem</th>
+                    <th width="10%">Ativo</th>
+                    <th>Opções</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td class="selection-cell">
+                            <label class="checkbox checkbox-single">
+                                <input type="checkbox" (change)="selectItem($event,item)" [checked]="item.checked"
+                                    [disabled]="!item.id" />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>
+                            <img [src]="item.url" preload [alt]="item.alt">
+                        </td>
+                        <td>{{item.nome}} - {{item.id}}</td>
+                        <td>
+                            {{item.tipo_imagens}}
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="item.ordem" class="form-control" [disabled]="!item.id">
+                        </td>
+                        <td>
+                            <span class="switch switch-outline switch-icon switch-success">
+                                <label>
+                                    <input type="checkbox" name="select" [(ngModel)]="item.visivel"
+                                        [disabled]="!item.id" />
+                                    <span></span>
+                                </label>
+                            </span>
+                        </td>
+                        <td>
+                            <!--    <button title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                                [hidden]="!item.id" (click)="openModalEdit($event,item.url)">
+                                <span [inlineSVG]="'assets/media/svg/icons/Communication/Write.svg'"
+                                    class="svg-icon svg-icon-md svg-icon-primary">
+                                </span>
+                            </button> -->
+                            <button title="Apagar" type="button" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                                [hidden]="!item.id" (click)="deleteChange(item.id)">
+                                <span [inlineSVG]="'assets/media/svg/icons/General/Trash.svg'"
+                                    class="svg-icon svg-icon-md svg-icon-danger" title="Apagar">
+                                </span>
+                            </button>
+                            <button title="Apagar" type="button" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                                [hidden]="item.id" (click)="deleteImageBeforeUpload(item)">
+                                <span [inlineSVG]="'assets/media/svg/icons/General/Trash.svg'"
+                                    class="svg-icon svg-icon-md svg-icon-danger" title="Apagar">
+                                </span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="items?.length==0">
+                        <td colspan="99" class="text-center">Não há imagens</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

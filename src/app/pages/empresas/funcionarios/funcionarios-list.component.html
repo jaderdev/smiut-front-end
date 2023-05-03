@@ -1,0 +1,118 @@
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <div class="form form-label-right">
+            <div class="form-group row">
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <select class="form-control" name="status" placeholder="Filtrar por visibilidade"
+                                (change)="filterByStatus($event)">
+                                <option value="">Todos</option>
+                                <option value="1">Ativos</option>
+                                <option value="0">Inativos</option>
+                            </select>
+                            <small class="form-text text-muted"><b>Filtro:</b> Ativos/Inativos</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <input type="search" class="form-control" name="searchText" placeholder="Pesquisar"
+                        (input)="onSearchChange($event.target.value)" />
+                    <small class="form-text text-muted"><b>Digite</b> sua pesquisa</small>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card-toolbar">
+                        <button routerLink="/funcionarios/new" type="button" class="btn btn-primary">Novo funcionário</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-container>
+            <div class="form">
+                <div class="row align-items-center form-group-actions margin-top-20 margin-bottom-20">
+                    <div class="col-xl-12">
+                        <div class="form-group form-group-inline">
+                            <div class="form-label form-label-no-wrap">
+                                <label class="font-bold font-danger">
+                                    <span>Itens selecionados:
+                                        <strong> {{selectedItems.length}}</strong>
+                                    </span>
+                                </label>
+                            </div>
+                            <div [hidden]="this.selectedItems.length == 0">
+                                <button type="button" class="btn btn-danger font-weight-bolder font-size-sm mr-1"
+                                    (click)="deleteAll()">
+                                    <i class="fa fa-trash"></i> Apagar selecionados
+                                </button>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <app-spinner [hidden]="!showLoadingSpinner"></app-spinner>
+
+        <div class="table-responsive angular-bootstrap-table" [hidden]="showLoadingSpinner">
+            <table class="table table-head-custom table-vertical-center overflow-hidden">
+                <thead>
+                    <th class="selection-cell-header" data-row-selection="true">
+                        <label class="checkbox checkbox-single">
+                            <input type="checkbox" (change)="selectAll($event)" [disabled]="items?.length==0"
+                                [checked]="checkedSelectAll" /><span></span>
+                        </label>
+                    </th>
+                    <th>Nome</th>
+                    <th>Empresa</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Cargo</th>
+                    <th>Ativo</th>
+                    <th>Opções</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td class="selection-cell">
+                            <label class="checkbox checkbox-single">
+                                <input type="checkbox" (change)="selectItem($event,item)" [checked]="item.checked" />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>{{item.nome}}</td>
+                        <td>{{item.empresa}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.telefone}}</td>
+                        <td>{{item.cargo}}</td>
+                        <td>
+                            <span class="switch switch-outline switch-icon switch-success">
+                                <label>
+                                    <input type="checkbox" name="select" [(ngModel)]="item.ativo"
+                                        (input)="switchChange($event,item)" />
+                                    <span></span>
+                                </label>
+                            </span>
+                        </td>
+                        <td>
+                            <a routerLink="/empresas/funcionarios/edit/{{item.id}}" title="Edit {{page}}"
+                                class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                <span [inlineSVG]="'assets/media/svg/icons/Communication/Write.svg'"
+                                    class="svg-icon svg-icon-md svg-icon-primary">
+                                </span>
+                            </a>
+                            <a title="Delete {{page}}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                                (click)="deleteChange(item.id)">
+                                <span [inlineSVG]="'assets/media/svg/icons/General/Trash.svg'"
+                                    class="svg-icon svg-icon-md svg-icon-danger">
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr *ngIf="items?.length==0">
+                        <td colspan="99" class="text-center">Não há registos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" ></app-paginator> -->
+    </div>
+</div>

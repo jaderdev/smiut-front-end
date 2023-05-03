@@ -1,0 +1,17 @@
+<ng-container id="image">
+    <div class="image-input image-input-outline" id="kt_profile_avatar">
+        <img [src]="image" preload class="img-fluid">
+        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change"
+            data-toggle="tooltip" title="" data-original-title="Modificar">
+            <i class="fa fa-pen icon-sm text-muted"></i>
+            <input type="file" name="profile_avatar" accept=".png,.jpg,.jpeg" (change)="changeImage($event)" />
+            <input type="hidden" name="profile_avatar_remove" />
+        </label>
+        <span *ngIf="image != noImg" (click)="removeImage()"
+            class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove"
+            data-toggle="tooltip" title="" data-original-title="Remover">
+            <i class="ki ki-bold-close icon-xs text-muted"></i>
+        </span>
+    </div>
+    <span class="form-text text-muted">Tipos suportados: png, jpg, jpeg.</span>
+</ng-container>
