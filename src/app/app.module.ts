@@ -48,6 +48,7 @@ function appInitializer(authService: AuthService, empresasService: EmpresasServi
 		InlineSVGModule.forRoot(),
 		NgbModule,
 		NgxGaugeModule,
+        InlineSVGModule
 	],
 	providers: [
 		{

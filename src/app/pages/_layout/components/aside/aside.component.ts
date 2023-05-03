@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService, UserModel } from 'src/app/modules/auth';
 import { EmpresasService } from 'src/app/services/empresas/empresas.service';
 import { LayoutService } from '../../../../_metronic/core';
-
+import { InlineSVGModule } from 'ng-inline-svg';
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
