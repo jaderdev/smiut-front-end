@@ -25,7 +25,6 @@
                 "highlight.js",
                 "axios"
             ],
-            "showCircularDependencies": false,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
