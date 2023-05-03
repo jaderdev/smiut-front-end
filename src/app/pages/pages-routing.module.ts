@@ -69,6 +69,15 @@ const routes: Routes = [
         ],
       },
       {
+        path: "tasmota",
+        children: [
+          { path: "", component: SensoresListComponent },
+          { path: "new", component: SensoresNewComponent },
+          { path: "all", component: SensoresAllComponent },
+          { path: "edit/:id", component: SensoresEditComponent },
+        ],
+      },
+      {
         path: "relatorios",
         children: [
           { path: "logs", component: RelatorioLogsComponent },

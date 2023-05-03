@@ -1,227 +1,234 @@
 <!--begin::Brand-->
 <div class="brand flex-column-auto" id="kt_brand" [ngClass]="brandClasses">
-  <!--begin::Logo-->
-  <a routerLink="/" class="brand-logo">
-    <img alt="Logo" [attr.src]="headerLogo" />
-  </a>
-  <!--end::Logo-->
-
-  <ng-container *ngIf="asideSelfMinimizeToggle">
-    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
-      <span [inlineSVG]="
-          './assets/media/svg/icons/Navigation/Angle-double-left.svg'
-        " cacheSVG="true" class="svg-icon svg-icon-xl"></span>
-    </button>
-  </ng-container>
-</div>
-<!--end::Brand-->
-
-<!--begin::Aside Menu-->
-<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-  <ng-container *ngIf="disableAsideSelfDisplay">
-    <!--begin::Header Logo-->
-    <a routerLink="/">
+    <!--begin::Logo-->
+    <a routerLink="/" class="brand-logo">
       <img alt="Logo" [attr.src]="headerLogo" />
     </a>
-    <!--end::Header Logo-->
-  </ng-container>
-  <!--begin::Menu Container-->
-  <div id="kt_aside_menu" class="aside-menu" [ngClass]="asideMenuCSSClasses" data-menu-vertical="1"
-    [attr.data-menu-scroll]="asideMenuScroll" [attr.data-menu-dropdown]="asideMenuDropdown"
-    data-menu-dropdown-timeout="500">
-    <!-- begin::Menu Nav -->
-    <ul class="menu-nav" [ngClass]="ulCSSClasses">
-      <!-- begin::1 Level -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-        <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text" translate="MENU.DASHBOARD"></span>
-        </a>
-      </li>
+    <!--end::Logo-->
 
-      <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open">
-        <div class="menu-toggle menu-link " routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <h4 class="menu-text">Configurações</h4>
-          <i class="menu-arrow"></i>
-        </div>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">Configurações</span>
-              </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-              <a class="menu-link" routerLink="/perfil" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">Perfil</span>
-              </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-              *ngIf='user$.super_administrador ==1'>
-              <a class="menu-link" routerLink="/dados-empresa" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">Dados empresariais</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="menu-section">
-        <h4 class="menu-text">Base</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-        <a class="menu-link" routerLink="/cadastros" routerLinkActive="active" *ngIf='user$.super_administrador ==1'>
-          <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">Cadastros</span>
-        </a>
-      </li>
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-        <a class="menu-link" routerLink="/sensores/all" routerLinkActive="active" *ngIf='user$.super_administrador ==1'>
-          <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">Sensores</span>
-        </a>
-      </li>
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf='user$.super_administrador ==0'>
-        <a class="menu-link" routerLink="/empresas/edit/{{user$.id}}" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text"> Empresa</span>
-        </a>
-      </li>
-      <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf='user$.super_administrador ==1'>
-        <div class="menu-toggle menu-link " routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <h4 class="menu-text">Empresas</h4>
-          <i class="menu-arrow"></i>
-        </div>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">Empresas</span>
-              </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-              *ngFor="let item of empresas">
-              <a class="menu-link" routerLink="/empresas/edit/{{item.id}}" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{item.primeiro_nome}}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-
-      <li class="menu-section">
-        <h4 class="menu-text">Relatórios</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open">
-        <div class="menu-toggle menu-link " routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <h4 class="menu-text">Relatórios</h4>
-          <i class="menu-arrow"></i>
-        </div>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">Relatórios</span>
-              </span>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-              <a class="menu-link" routerLink="/relatorios/sensores/media" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">Sensores Média</span>
-              </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-              <a class="menu-link" routerLink="/relatorios/sensores/intervalo" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">Sensores Intervalo</span>
-              </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-              *ngIf='user$.super_administrador ==1'>
-              <a class="menu-link" routerLink="/relatorios/logs" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">Logs</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-
-
-      <!-- 
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open">
-        <a class="menu-link menu-toggle" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Design/PenAndRuller.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">Serviços</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
-              [routerLinkActiveOptions]="{exact: true}">
-              <a class="menu-link" routerLink="/servicos/page" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">Página</span>
-              </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
-              [routerLinkActiveOptions]="{exact: true}">
-              <a class="menu-link" routerLink="/servicos/categorias" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">Categorias</span>
-              </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
-              [routerLinkActiveOptions]="{exact: true}">
-              <a class="menu-link" routerLink="/servicos" routerLinkActive="active">
-                <i class="menu-bullet menu-bullet-dot">
-                  <span></span>
-                </i>
-                <span class="menu-text">Listagem</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li> -->
-
-    </ul>
+    <ng-container *ngIf="asideSelfMinimizeToggle">
+      <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+        <span [inlineSVG]="
+            './assets/media/svg/icons/Navigation/Angle-double-left.svg'
+          " cacheSVG="true" class="svg-icon svg-icon-xl"></span>
+      </button>
+    </ng-container>
   </div>
-</div>
+  <!--end::Brand-->
+
+  <!--begin::Aside Menu-->
+  <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+    <ng-container *ngIf="disableAsideSelfDisplay">
+      <!--begin::Header Logo-->
+      <a routerLink="/">
+        <img alt="Logo" [attr.src]="headerLogo" />
+      </a>
+      <!--end::Header Logo-->
+    </ng-container>
+    <!--begin::Menu Container-->
+    <div id="kt_aside_menu" class="aside-menu" [ngClass]="asideMenuCSSClasses" data-menu-vertical="1"
+      [attr.data-menu-scroll]="asideMenuScroll" [attr.data-menu-dropdown]="asideMenuDropdown"
+      data-menu-dropdown-timeout="500">
+      <!-- begin::Menu Nav -->
+      <ul class="menu-nav" [ngClass]="ulCSSClasses">
+        <!-- begin::1 Level -->
+        <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+          <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text" translate="MENU.DASHBOARD"></span>
+          </a>
+        </li>
+
+        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
+          routerLinkActive="menu-item-open">
+          <div class="menu-toggle menu-link " routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <h4 class="menu-text">Configurações</h4>
+            <i class="menu-arrow"></i>
+          </div>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">Configurações</span>
+                </span>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+                <a class="menu-link" routerLink="/perfil" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">Perfil</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+                *ngIf='user$.super_administrador ==1'>
+                <a class="menu-link" routerLink="/dados-empresa" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">Dados empresariais</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="menu-section">
+          <h4 class="menu-text">Base</h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+
+        <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+          <a class="menu-link" routerLink="/cadastros" routerLinkActive="active" *ngIf='user$.super_administrador ==1'>
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text">Cadastros</span>
+          </a>
+        </li>
+        <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+          <a class="menu-link" routerLink="/sensores/all" routerLinkActive="active" *ngIf='user$.super_administrador ==1'>
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text">Sensores</span>
+          </a>
+        </li>
+        <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+          <a class="menu-link" routerLink="/tasmota/all" routerLinkActive="active" *ngIf='user$.super_administrador ==1'>
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text">Tasmota</span>
+          </a>
+        </li>
+        <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+          *ngIf='user$.super_administrador ==0'>
+          <a class="menu-link" routerLink="/empresas/edit/{{user$.id}}" routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text"> Empresa</span>
+          </a>
+        </li>
+        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
+          routerLinkActive="menu-item-open" *ngIf='user$.super_administrador ==1'>
+          <div class="menu-toggle menu-link " routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <h4 class="menu-text">Empresas</h4>
+            <i class="menu-arrow"></i>
+          </div>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">Empresas</span>
+                </span>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+                *ngFor="let item of empresas">
+                <a class="menu-link" routerLink="/empresas/edit/{{item.id}}" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Design/Image.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">{{item.primeiro_nome}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+        <li class="menu-section">
+          <h4 class="menu-text">Relatórios</h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover"
+          routerLinkActive="menu-item-open">
+          <div class="menu-toggle menu-link " routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Settings-2.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <h4 class="menu-text">Relatórios</h4>
+            <i class="menu-arrow"></i>
+          </div>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">Relatórios</span>
+                </span>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+                <a class="menu-link" routerLink="/relatorios/sensores/media" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">Sensores Média</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+                <a class="menu-link" routerLink="/relatorios/sensores/intervalo" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">Sensores Intervalo</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+                *ngIf='user$.super_administrador ==1'>
+                <a class="menu-link" routerLink="/relatorios/logs" routerLinkActive="active">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+                    class="svg-icon menu-icon"></span>
+                  <span class="menu-text">Logs</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+
+        <!--
+        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+          routerLinkActive="menu-item-open">
+          <a class="menu-link menu-toggle" routerLinkActive="active">
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/PenAndRuller.svg'" cacheSVG="true"
+              class="svg-icon menu-icon"></span>
+            <span class="menu-text">Serviços</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="menu-link" routerLink="/servicos/page" routerLinkActive="active">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">Página</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="menu-link" routerLink="/servicos/categorias" routerLinkActive="active">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">Categorias</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="menu-link" routerLink="/servicos" routerLinkActive="active">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">Listagem</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li> -->
+
+      </ul>
+    </div>
+  </div>
