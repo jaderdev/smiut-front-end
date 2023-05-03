@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
-            "showCircularDependencies": false,
+            "showCircularDependencies": true,
             "allowedCommonJsDependencies": [
               "object-path",
               "apexcharts",
