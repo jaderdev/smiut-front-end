@@ -5,10 +5,10 @@ export const environment = {
   isMockEnabled: false,
   language: "pt",
   urlAPI:
-    "//smiut-api.vercel.app/api",
+    "//smiut-service-vercel.vercel.app//api",
   urlUploads:
     "//smiut.eastecnologia.com/",
-  urlSite: "//smiut.app",
+  urlSite: "//smiut-front-h7mnwf390-jaderdev.vercel.app",
   prod_sulfix: 'public',
   ewelinkConfig: {
     token: "0f0e0208-6f3f-43ed-b6f0-eeba5f6b7887",
