@@ -56,6 +56,7 @@ import { RelatoriosSensorMediaComponent } from './base/relatorios/sensores/relat
 import { RelatoriosSensorIndividualComponent } from "./base/relatorios/sensores/relatorios-sensor-individual/relatorios-sensor-individual.component";
 import { DadosEmpresaComponent } from "./base/dados-empresa/dados-empresa.component";
 import { SensoresAllComponent } from "./sensores/all/sensores-all.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { SensoresAllComponent } from "./sensores/all/sensores-all.component";
     NgxMaskModule.forRoot(),
     MatButtonToggleModule,
     ImagePreloadModule,
-    NgxGaugeModule
+    NgxGaugeModule,
+    RouterModule
   ],
 })
 export class LayoutModule { }

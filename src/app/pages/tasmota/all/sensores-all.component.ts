@@ -61,7 +61,7 @@ export class TasmotaAllComponent implements OnInit {
     //   this.cdf.detectChanges();
     // });
 
-    alert("Eu funciono aqui")
+    console.log("Eu funciono aqui")
 
     let x = this.mongodb.recoverSensores("topico/SENSOR/RESULT");
     console.log(x)
