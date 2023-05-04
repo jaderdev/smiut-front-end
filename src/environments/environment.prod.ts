@@ -5,7 +5,7 @@ export const environment = {
   isMockEnabled: false,
   language: "pt",
   urlAPI:
-    "//smiut-service-vercel.vercel.app//api",
+    "//smiut-service-vercel.vercel.app/api",
   urlUploads:
     "//smiut.eastecnologia.com/",
   urlSite: "//smiut-front-h7mnwf390-jaderdev.vercel.app",
