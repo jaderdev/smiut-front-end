@@ -16,6 +16,7 @@ import { RelatoriosSensorIntervaloTempoComponent } from "./base/relatorios/senso
 import { RelatoriosSensorMediaComponent } from "./base/relatorios/sensores/relatorios-sensor-media/relatorios-sensor-media.component";
 import { DadosEmpresaComponent } from "./base/dados-empresa/dados-empresa.component";
 import { SensoresAllComponent } from "./sensores/all/sensores-all.component";
+import { TasmotaAllComponent } from "./tasmota/all/tasmota-all.component";
 
 const routes: Routes = [
   {
@@ -73,7 +74,7 @@ const routes: Routes = [
         children: [
           { path: "", component: SensoresListComponent },
           { path: "new", component: SensoresNewComponent },
-          { path: "all", component: SensoresAllComponent },
+          { path: "all", component: TasmotaAllComponent },
           { path: "edit/:id", component: SensoresEditComponent },
         ],
       },

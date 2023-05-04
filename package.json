@@ -45,6 +45,7 @@
     "html-to-pdfmake": "^2.4.4",
     "jszip": "^3.5.0",
     "moment": "^2.27.0",
+    "mongodb": "^5.3.0",
     "ng-apexcharts": "^1.5.1",
     "ng-inline-svg": "^10.1.0",
     "ngx-clipboard": "^13.0.1",

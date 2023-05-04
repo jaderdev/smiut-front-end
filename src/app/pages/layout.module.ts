@@ -57,6 +57,7 @@ import { RelatoriosSensorIndividualComponent } from "./base/relatorios/sensores/
 import { DadosEmpresaComponent } from "./base/dados-empresa/dados-empresa.component";
 import { SensoresAllComponent } from "./sensores/all/sensores-all.component";
 import { RouterModule } from "@angular/router";
+import { TasmotaAllComponent } from './tasmota/all/tasmota-all.component'
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { RouterModule } from "@angular/router";
     RelatoriosSensorIntervaloTempoComponent,
     RelatoriosSensorMediaComponent,
     DadosEmpresaComponent,
+    TasmotaAllComponent
   ],
   imports: [
     CommonModule,

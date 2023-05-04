@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TasmotaAllComponent } from './sensores-all.component';
+import { TasmotaAllComponent } from './tasmota-all.component';
 
 describe('SensoresAllComponent', () => {
   let component: TasmotaAllComponent;

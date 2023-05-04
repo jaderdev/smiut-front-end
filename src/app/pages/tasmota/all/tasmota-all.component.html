@@ -78,7 +78,7 @@
                         </th>
                         <th>Nome</th>
                         <th>Device ID</th>
-                        <th>Empresa</th>
+                        <th>Bateria</th>
                         <th>Temperatura</th>
                         <th>Umidade</th>
                         <th>Ativo</th>
@@ -94,15 +94,17 @@
                                     <span></span>
                                 </label>
                             </td>
-                            <td class="pointer" (click)='openModalSensor(item)'>{{item.nome}}</td>
-                            <td>{{item.deviceid}}</td>
-                            <td>{{item.nome_empresa}}</td>
+                            <td class="pointer" (click)='openModalSensor(item)'>{{item.Device}}</td>
+                            <td>{{item._id}}</td>
+                            <td>{{item.BatteryPercentage}}</td>
                             <td>
-                                <span *ngIf="item?.temp_ativo">
+                                {{ item.Temperature }}
+                                <!-- <span *ngIf="item?.temp_ativo">
                                     {{item.atual_temp}} {{gaugeOptions?.temp}}
-                                </span>
+                                </span> -->
                             </td>
                             <td>
+                                {{ item.Humidity }}
                                 <span *ngIf="item?.umid_ativo">
                                     {{item.atual_umid}} {{gaugeOptions?.umid}}
                                 </span>
@@ -116,7 +118,7 @@
                                     </label>
                                 </span>
                             </td>
-                            <td> {{item.online?'Sim':'Não'}}</td>
+                            <td> {{item.Reachable?'Sim':'Não'}}</td>
                             <td>
                                 <a routerLink="/{{page}}/edit/{{item.id}}" title="Edit {{page}}"
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
@@ -196,6 +198,3 @@
         <!-- <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" ></app-paginator> -->
     </div>
 </div>
-<script>
-    console.log("Assim eu funciono")
-</script>

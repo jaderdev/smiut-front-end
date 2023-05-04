@@ -5,16 +5,15 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UserModel, AuthService } from 'src/app/modules/auth';
 import { MessagesService } from 'src/app/services/base/messages/messages.service';
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
-import { SensoresService } from 'src/app/services/sensores/sensores.service';
+import { SensoresService } from 'src/app/services/sensores/sensores.tasmota.service';
 import { onValue } from "firebase/database";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RelatoriosSensorIndividualComponent } from '../../base/relatorios/sensores/relatorios-sensor-individual/relatorios-sensor-individual.component';
-import { MongodbService } from 'src/app/services/mongodb/mongodb.service';
 
 @Component({
-  selector: 'app-sensores-all',
-  templateUrl: './sensores-all.component.html',
-  styleUrls: ['./sensores-all.component.scss']
+  selector: 'app-tasmota-all',
+  templateUrl: './tasmota-all.component.html',
+  styleUrls: ['./tasmota-all.component.scss']
 })
 export class TasmotaAllComponent implements OnInit {
   page: string = "tasmota";
@@ -40,7 +39,6 @@ export class TasmotaAllComponent implements OnInit {
     private userService: AuthService,
     private firebaseService: FirebaseService,
     private modalService: NgbModal,
-    private mongodb: MongodbService
   ) {
 
     this.userService.currentUserSubject.asObservable().subscribe((data: any) => {
@@ -49,39 +47,36 @@ export class TasmotaAllComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // this.route.params.subscribe(async (params: any) => {
-    //   this.id = params["id"];
-    //   this.items = await this.getData();
-    //   if (this.items[0]?.id) {
+    this.route.params.subscribe(async (params: any) => {
+      this.id = params["id"];
+      this.items = await this.getData();
+    //   if (this.items[0]?._id) {
     //     this.items.map((a: any) => a.ativo = a.ativo == 1);
-    //     this.getRealtimeSensors();
+    //     // this.getRealtimeSensors();
     //     this.itemsAux = [...this.items];
     //   }
-    //   this.showLoadingSpinner = false;
-    //   this.cdf.detectChanges();
-    // });
-
-    console.log("Eu funciono aqui")
-
-    let x = this.mongodb.recoverSensores("topico/SENSOR/RESULT");
-    console.log(x)
-  }
-
-  getRealtimeSensors() {
-    const realtimeData = this.firebaseService.getRef();
-    onValue(realtimeData, (snapshot) => {
-      const auxData = snapshot.val();
-      let data: Object = {};
-
-      Object.values(auxData)
-        .filter((a: any) => a.sensores)
-        .map((a: any) => Object.assign(data, a.sensores));
-
-      if (!data) return;
-      this.mergeRealtimeLocalData(data);
+    this.items = this.items.map((a:any) => a.shift())
+    console.log(this.items)
+      this.showLoadingSpinner = false;
       this.cdf.detectChanges();
     });
   }
+
+//   getRealtimeSensors() {
+//     const realtimeData = this.firebaseService.getRef();
+//     onValue(realtimeData, (snapshot) => {
+//       const auxData = snapshot.val();
+//       let data: Object = {};
+
+//       Object.values(auxData)
+//         .filter((a: any) => a.sensores)
+//         .map((a: any) => Object.assign(data, a.sensores));
+
+//       if (!data) return;
+//       this.mergeRealtimeLocalData(data);
+//       this.cdf.detectChanges();
+//     });
+//   }
 
   mergeRealtimeLocalData(realtimeData: any) {
     this.items.map((item: any) => {
@@ -96,7 +91,7 @@ export class TasmotaAllComponent implements OnInit {
 
   async getData() {
     let response = await this.service.getAll();
-    response.map((item: any) => item.range = JSON.parse(item.range));
+    // response.map((item: any) => item.range = JSON.parse(item.range));
     return response;
   }
 
