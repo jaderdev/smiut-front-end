@@ -98,16 +98,10 @@
                             <td>{{item._id}}</td>
                             <td>{{item.BatteryPercentage}}</td>
                             <td>
-                                {{ item.Temperature }}
-                                <!-- <span *ngIf="item?.temp_ativo">
-                                    {{item.atual_temp}} {{gaugeOptions?.temp}}
-                                </span> -->
+                                {{item.Temperature}} {{gaugeOptions?.temp}}
                             </td>
                             <td>
-                                {{ item.Humidity }}
-                                <span *ngIf="item?.umid_ativo">
-                                    {{item.atual_umid}} {{gaugeOptions?.umid}}
-                                </span>
+                                {{item.Humidity}} {{gaugeOptions?.umid}}
                             </td>
                             <td>
                                 <span class="switch switch-outline switch-icon switch-success">
